@@ -99,7 +99,7 @@ header nav div:hover + ul{
   position: absolute;
   top: 50px;
   right: 45px;
-  width: 25%;
+  width: 30%;
   text-align: center;
   background-color: #fff;
 }
