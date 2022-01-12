@@ -103,7 +103,7 @@ header nav div:hover + ul{
   text-align: center;
   background-color: #fff;
 }
-@media (min-width: 640px){
+@media (min-width: 672px){
   header nav div {
     display: none;
     }
