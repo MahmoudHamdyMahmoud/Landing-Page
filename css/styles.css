@@ -93,26 +93,28 @@ header nav div span {
   border-radius: 10%;
 }
 
-header nav div:hover + ul{
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 50px;
-  right: 45px;
-  width: 30%;
-  text-align: center;
-  background-color: #fff;
-}
+
+
 @media (min-width: 672px){
   header nav div {
     display: none;
     }
   }
 
-@media (max-width: 640px){
-  .navbar__menu ul{
+@media (max-width: 672px){
+  .hidden{
     display: none;
-  }  
+  }
+  .show{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 50px;
+    right: 45px;
+    width: 30%;
+    text-align: center;
+    background-color: #fff;
+  }
 }
 
 .navbar__menu ul {

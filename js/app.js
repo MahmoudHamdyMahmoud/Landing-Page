@@ -54,52 +54,69 @@ for (let i = 1; i <= numberOfSections; i++){
 
 const header = document.querySelector('.page__header')
 const item = document.getElementsByTagName('li');
-const section = document.getElementsByTagName('section');
-for ( let i = 0; i < item.length; i++){
-  item[i].addEventListener('click', function(){
-    if (section[i].classList.contains('your-active-class') == false){
-      
-      // Add class 'your-active-class' to section when near top of viewport
-      section[i].classList.add('your-active-class');
+const sections = document.getElementsByTagName('section');
+const navResponsive = document.getElementById('responsive')
+const responsiveItems = document.querySelector('ul')
+
+function makeActive(){
+  for(let i = 0; i < sections.length; i++){
+    const box = sections[i].getBoundingClientRect();
+    if (box.top <= 150 && box.bottom >= 150){
+      sections[i].classList.add('your-active-class');
+      sections[i].querySelector('h2').style.color = '#cc1';
+    }else{
+      sections[i].classList.remove('your-active-class');
+      sections[i].querySelector('h2').style.color = '#fff';
+    }
+    if (sections[i].classList.contains('your-active-class') == true){
       item[i].classList.add('activ_link');
       item[i].querySelector('a').style.color = '#fff';
-
-      // Scroll to section on link click
-      section[i].scrollIntoView({behavior: 'smooth'});
+    }else{
+      item[i].classList.remove('activ_link');
+      item[i].querySelector('a').style.color = '#333';
     }
-    // Set sections as active
-    for (let j = 0; j < section.length; j++){
-      if (section[j] == section[i]){
-        continue
-      }else{
-        section[j].classList.remove('your-active-class'); 
-        item[j].querySelector('.menu__link').style.color = '#000';
-        item[j].classList.remove('activ_link');
-      }
-    }
+  }
+}
 
+document.addEventListener('scroll', function(){
+  makeActive();
+});
+// function to scroll when clicking navbar in small screens
+navResponsive.addEventListener('click', function(e){
+  e.preventDefault();
+  responsiveItems.classList.toggle('hidden');
+  responsiveItems.classList.toggle('show');
+});
+
+
+for ( let i = 0; i < item.length; i++){
+  item[i].addEventListener('click', function(e){
+    e.preventDefault();
+    // Scroll to section on link click
+    sections[i].scrollIntoView({behavior: 'smooth'});
 
     // function to hide the nav bar after scrolling
-  window.addEventListener('scroll', function(){
-    setTimeout(() => {
-      header.classList.add('hide');
-      header.classList.remove('appear');}, 300);
+    if (window.innerWidth >= 672){
+      window.addEventListener('scroll', function(){
+        setTimeout(() => {
+          header.classList.add('hide');
+          header.classList.remove('appear');}, 300);
 
 
-    })
-    // function to show the nav bar when mouse is top
-  window.addEventListener('mousemove', function(n){
-    if (n.clientY < 50){
-      setTimeout(() => {
-        header.classList.add('appear');
-        header.classList.remove('hide');}, 300);  
-    }
-    if (n.clientY > 50){
-      setTimeout(() => {
-        header.classList.add('hide');
-        header.classList.remove('appear');}, 300);
-    }
-        })
+        });
+        // function to show the nav bar when mouse is top
+      window.addEventListener('mousemove', function(n){
+        if (n.clientY < 50){
+          setTimeout(() => {
+            header.classList.add('appear');
+            header.classList.remove('hide');}, 300);  
+        }
+        if (n.clientY > 50){
+          setTimeout(() => {
+            header.classList.add('hide');
+            header.classList.remove('appear');}, 300);
+        }
+        });}
 });
 }
 
